@@ -425,7 +425,6 @@ int writeconfig()
 	write_tetrom_colors(fp);
 	fprintf(fp, "[hiscore]\n");
 	writehiscores(fp);
-	//if (hiscores[0].score) {}
 	fclose(fp);
 	return 1;
 }
