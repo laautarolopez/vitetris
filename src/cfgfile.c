@@ -24,8 +24,6 @@ static const char input_keynames[12][6] = {
 };
 static const char tcolor_keys[8] = "ijlostz";
 
-void writehiscores(FILE *fp);
-
 void setcfgfilename(const char *argv0)
 {
 #ifdef UNIX
@@ -425,10 +423,8 @@ int writeconfig()
 	}
 	freeoptions("");
 	write_tetrom_colors(fp);
-	if (hiscores[0].score) {
-		fprintf(fp, "[hiscore]\n");
-		writehiscores(fp);
-	}
+	fprintf(fp, "[hiscore]\n");
+	writehiscores(fp);
 	fclose(fp);
 	return 1;
 }
