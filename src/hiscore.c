@@ -8,7 +8,7 @@
 
 struct hiscore hiscores[10] = {{"", 0}};
 
-static const char last_chars[8] = "Z≈ƒ÷!?‹";
+static const char last_chars[8] = "Z√Ö√Ñ√ñ!?√ú";
 
 static void addhiscore(struct hiscore *hs)
 {
@@ -28,7 +28,7 @@ static void addhiscore(struct hiscore *hs)
 	hiscores[i] = *hs;
 }
 
-/* valid characters [A-Z0-9 .!?-≈ƒ÷‹] */
+/* valid characters [A-Z0-9 .!?-√Ö√Ñ√ñ√ú] */
 static int encodehiscore_name(const char *name, FILE *fp, int backcomp)
 {
 	int doshack = 0;
@@ -277,8 +277,8 @@ int readhiscores(const char *filename)
 	if (fp = fopen(cfgfilename, "r"))
 		readhiscores_config(fp, line);
 #ifdef UNIX
-	if (fp = fopen(cfgfilename, "r"))
-		readhiscores_config(fp, line);
+	if (fp = fopen(HISCORE_FILENAME, "r"))
+		readhiscores_fp(fp, line, 0);
 	if (filename)
 		savehiscores_global();
 #endif
@@ -324,7 +324,7 @@ int savehiscore(const char *name)
 
 const char *gethiscorename(int i, char *buf)
 {
-	const char lat1[5] = "≈ƒ÷‹";
+	const char lat1[5] = "√Ö√Ñ√ñ√ú";
 	const char ascii[5] = "AAOU";
 	const char *nm = hiscores[i].name;
 	const char *p;
