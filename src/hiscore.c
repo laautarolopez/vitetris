@@ -10,8 +10,6 @@ struct hiscore hiscores[10] = {{"", 0}};
 
 static const char last_chars[8] = "ZÅÄÖ!?Ü";
 
-void writehiscores(FILE *fp);
-
 static void addhiscore(struct hiscore *hs)
 {
 	int i;
@@ -258,7 +256,8 @@ static void mergehiscores(const char *filename, char *line)
 #ifdef UNIX
 static int savehiscores_global()
 {
-	FILE *fp = fopen(HISCORE_FILENAME, "w");
+	FILE *fp;
+	fp = fopen(cfgfilename, "w");
 	if (!fp)
 		return 0;
 	writehiscores(fp);
@@ -297,10 +296,8 @@ void writehiscores(FILE *fp)
 	}
 #ifdef UNIX
 	for (i=0; i < 10; i++)
-		if (doshack[i]) {
-			encodehiscore(&hiscores[i], fp, 1);
-			putc('\n', fp);
-		}
+		encodehiscore(&hiscores[i], fp, 1);
+		putc('\n', fp);
 #endif
 }
 
